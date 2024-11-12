@@ -8,10 +8,10 @@ CFLAGS = -Wall -Wextra -std=c99
 TARGET = executaveis/algorithm
 
 # Source files
-SRCS = main.c algorithm.c
+SRCS = src/main.c src/algorithm.c
 
 # Object files
-OBJS = $(SRCS:%.c=executaveis/%.o)
+OBJS = $(SRCS:src/%.c=executaveis/%.o)
 
 # Build directory
 BUILD_DIR = executaveis
@@ -32,7 +32,7 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 # Compile source files to object files
-executaveis/%.o: %.c
+executaveis/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Para executar o programa:
