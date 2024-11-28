@@ -11,6 +11,6 @@ typedef struct{
 }jogador;
 
 void imprime_vetor(jogador[], int);
-
+void bubbleSort(jogador[], int);
 
 #endif

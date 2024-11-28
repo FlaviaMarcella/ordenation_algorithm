@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include "algorithm.h"
 
 
@@ -22,7 +23,7 @@ char linha[256];
 	//iteração para preencher o vetor com os dados lidos do arquivo
 	while (fgets(linha,sizeof(linha),arquivo)){
 		//ignora o cabeçalho
-		if (contador == 0 &&strchr(linha,",")){
+		if (contador == 0 &&strchr(linha,',')){
 			contador++;
 			continue;
 		}
@@ -54,7 +55,12 @@ char linha[256];
 
 	fclose(arquivo);
 
-	imprime_vetor(jogadores,contador);
+	//ordena o vetor com bubble sort
+	bubbleSort(jogadores, contador);
+	//imprime_vetor(jogadores,contador);
+	imprime_vetor(jogadores, contador);
+
+	return 0;
 }
 
 
