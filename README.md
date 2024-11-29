@@ -15,7 +15,6 @@ Para executar o código, siga os passos abaixo no terminal:
 1. Clone o repositório:
    
    git clone <https://github.com/FlaviaMarcella/ordenation_algorithm.git>
-   cd ordenation_algorithm
 
 2. Compile o código:
    
