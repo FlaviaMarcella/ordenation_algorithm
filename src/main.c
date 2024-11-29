@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 #include "algorithm.h"
 
 
@@ -56,13 +57,18 @@ char linha[256];
 
 	fclose(arquivo);
 
+	double tempo1 = 0;
 	//imprime_vetor(jogadores, contador);
 
+	clock_t inicio1 = clock();
 	//bubbleSort(jogadores, contador);
 	//mergeSort(jogadores,0, contador-1);
 	radixSort(jogadores,contador);
 	//imprime_vetor(jogadores,contador);
+	clock_t fim1 = clock();
+	tempo1 += (double)(fim1-inicio1)/CLOCKS_PER_SEC;
 	imprime_vetor(jogadores, contador);
+	printf("tempo de execução: %f\n",tempo1);
 
 	return 0;
 }
