@@ -105,8 +105,8 @@ char linha[256];
 
 	tempo1 += (double)(fim-inicio)/CLOCKS_PER_SEC;
 
-	// Função para imprimir o vetor de jogadores
-	//imprime_vetor(jogadores, contador);
+	// Função para imprimir o vetor de jogadores ordenado
+	imprime_vetor(jogadores, contador);
 
 	// Imprime o tempo de execução
     printf("Tempo de execução: %f segundos\n", tempo1);
