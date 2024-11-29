@@ -6,12 +6,27 @@
 #include "algorithm.h"
 
 
+int main(int argc, char *argv[]) {
 
-int main(){
+    if (argc != 2) {
+        printf("Uso: %s <algoritmo>\n", argv[0]);
+        printf("1: Método de ordenação simples\n");
+        printf("2: Método de ordenação ótimo\n");
+        printf("3: Método de ordenação em tempo linear\n");
+        return 1;
+    }
+
+    int algoritmo = atoi(argv[1]);
+
+	if (algoritmo < 1 || algoritmo > 3) {
+		printf("Opção inválida\n");
+		return 1;
+	}
+
 	//funcao para abrir o arquivo
-	FILE *arquivo = fopen("jogadores.csv","r");
+	FILE *arquivo = fopen("./src/jogadores.csv","r");
 	if(arquivo == NULL){
-		printf("erro ao abri o arquivo\n");
+		printf("erro ao abrir o arquivo\n");
 		return 1;
 	}
 
@@ -58,17 +73,43 @@ char linha[256];
 	fclose(arquivo);
 
 	double tempo1 = 0;
+	clock_t inicio = 0;
+	clock_t fim = 0;
+
+	// Seleciona o algoritmo de ordenação com base no argumento
+    switch (algoritmo) {
+        case 1:
+            inicio = clock();
+            bubbleSort(jogadores, contador);
+            fim = clock();
+            break;
+        case 2:
+            inicio = clock();
+            mergeSort(jogadores, 0, contador - 1);
+            fim = clock();
+            break;
+        case 3:
+            inicio = clock();
+            radixSort(jogadores, contador);
+            fim = clock();
+            break;
+        default:
+            printf("Algoritmo inválido. Use 1, 2 ou 3.\n");
+            return 1;
+    }
+
+
+	tempo1 += (double)(fim-inicio)/CLOCKS_PER_SEC;
+
+	// Função para imprimir o vetor de jogadores
 	//imprime_vetor(jogadores, contador);
 
-	clock_t inicio1 = clock();
-	//bubbleSort(jogadores, contador);
-	//mergeSort(jogadores,0, contador-1);
-	radixSort(jogadores,contador);
-	//imprime_vetor(jogadores,contador);
-	clock_t fim1 = clock();
-	tempo1 += (double)(fim1-inicio1)/CLOCKS_PER_SEC;
-	imprime_vetor(jogadores, contador);
-	printf("tempo de execução: %f\n",tempo1);
+	// Imprime o tempo de execução
+    printf("Tempo de execução: %f segundos\n", tempo1);
+    printf("Número de comparações: %lld\n", comparacoes);
+    printf("Número de trocas: %lld\n", trocas);
+    printf("Memória total gasta: %zu bytes\n", sizeof(jogadores) + contador * sizeof(jogador));
+
 
 	return 0;
 }

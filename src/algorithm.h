@@ -17,4 +17,7 @@ void mergeSort(jogador[], int, int);
 void countingSort(jogador[], int, int);
 void radixSort(jogador[], int);
 
+extern long int comparacoes;
+extern long int trocas;
+
 #endif

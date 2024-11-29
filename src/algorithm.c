@@ -4,10 +4,9 @@
 #include <string.h>
 #include <time.h>
 #include "algorithm.h"
- 
-void helloWorld(void){
-    printf("Hello World!\n");
-}
+
+long long trocas = 0;
+long long comparacoes = 0;
 
 void imprime_vetor(jogador jogadores[], int contador){
     printf("Jogadores ordenados por nome:\n");
@@ -30,6 +29,8 @@ void bubbleSort(jogador jogadores[], int contador){
     bool swapped;
     for(i=0;i<contador-1;i++){
         for(j=0; j<contador-i-1;j++){
+            //conta o número de comparações feitas
+            comparacoes++;
             //a função strcmp compara duas strings e retorna
             // <0 se a primeira string em antes da segunda em ordem alfabética
             //0 se as strings são iguais
@@ -41,6 +42,8 @@ void bubbleSort(jogador jogadores[], int contador){
                 strcpy(jogadores[j].nome, jogadores[j+1].nome);
                 strcpy(jogadores[j+1].nome, temp);
                 swapped = true;
+                //conta o número de trocas feitas
+                trocas++;
             }
         }
         //confere se houve troca de elementos. Se não houve a função termina
@@ -68,6 +71,8 @@ void merge(jogador jogadores[], int inicio, int meio, int fim){
     i=0;j=0; int k=inicio;
 
     while(i<dimE && j<dimD){
+        //conta o número de comparações feitas
+        comparacoes++;
         if(strcmp(esquerda[i].nome, direita[j].nome)<=0){
             jogadores[k] = esquerda[i];
             i++;
@@ -76,16 +81,25 @@ void merge(jogador jogadores[], int inicio, int meio, int fim){
             j++;
         }
         k++;
+
+        //conta o número de trocas feitas
+        trocas++;
     }
     while(i<dimE){
         jogadores[k] = esquerda[i];
         i++;
         k++;
+
+        //conta o número de trocas feitas
+        trocas++;
     }
     while(j<dimD){
         jogadores[k] = direita[j];
         j++;
         k++;
+
+        //conta o número de trocas feitas
+        trocas++;
     }
 }
 
@@ -110,6 +124,9 @@ void countingSort(jogador jogadores[], int n, int pos){
     for(int i=0; i<n; i++){
         int indice = (unsigned char)jogadores[i].nome[pos];
         cont[indice]++;
+
+        //conta o número de comparações feitas
+        comparacoes++;
     }
 
     //atualiza o vetor de contagem para dizer as posições finais
@@ -122,6 +139,9 @@ void countingSort(jogador jogadores[], int n, int pos){
         int indice=(unsigned char)jogadores[i].nome[pos];
         saida[cont[indice]-1] = jogadores[i];
         cont[indice]--;
+
+        //conta o número de trocas feitas
+        trocas++;
     }
 
     //copia o vetor de saida para o vetor original
@@ -140,6 +160,9 @@ void radixSort(jogador jogadores[], int n){
         if(tamanho_nome>maior_tamanho){
             maior_tamanho = tamanho_nome;
         }
+
+        //conta o número de comparações feitas
+        comparacoes++;
     }
 
     //usa o algortimo counting sort para cada posição do nome
