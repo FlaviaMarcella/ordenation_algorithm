@@ -14,5 +14,7 @@ void imprime_vetor(jogador[], int);
 void bubbleSort(jogador[], int);
 void merge(jogador[], int, int, int);
 void mergeSort(jogador[], int, int);
+void countingSort(jogador[], int, int);
+void radixSort(jogador[], int);
 
 #endif

@@ -59,7 +59,8 @@ char linha[256];
 	//imprime_vetor(jogadores, contador);
 
 	//bubbleSort(jogadores, contador);
-	mergeSort(jogadores,0, contador-1);
+	//mergeSort(jogadores,0, contador-1);
+	radixSort(jogadores,contador);
 	//imprime_vetor(jogadores,contador);
 	imprime_vetor(jogadores, contador);
 

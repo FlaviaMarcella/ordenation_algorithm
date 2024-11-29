@@ -49,6 +49,8 @@ void bubbleSort(jogador jogadores[], int contador){
 }
 
 //função para mesclar duas metades ordenadas, usadas no merge sort
+//da mesma forma que o bubble sort, a função foi adaptada para ordenar
+//strings utilizando a função strcmp para comparar os nomes
 void merge(jogador jogadores[], int inicio, int meio, int fim){
     int dimE = meio - inicio + 1;
     int dimD = fim - meio;
@@ -94,5 +96,54 @@ void mergeSort(jogador jogadores[], int inicio, int fim){
         mergeSort(jogadores, meio+1, fim);
 
         merge(jogadores, inicio, meio, fim);
+    }
+}
+
+//a função counting sort é utilizada na função radix sort
+void countingSort(jogador jogadores[], int n, int pos){
+    jogador saida[n];
+    //256 é o número de carcteres da tabela ASCII
+    int cont[256] = {0};
+
+    //conta a frequenca dos carcteres na posição pos de cada nome
+    for(int i=0; i<n; i++){
+        int indice = (unsigned char)jogadores[i].nome[pos];
+        cont[indice]++;
+    }
+
+    //atualiza o vetor de contagem para dizer as posições finais
+    for(int i=1;i<256;i++){
+        cont[i] += cont[i-1];
+    }
+
+    //constroi o vetor de saida
+    for(int i=n-1;i>=0;i--){
+        int indice=(unsigned char)jogadores[i].nome[pos];
+        saida[cont[indice]-1] = jogadores[i];
+        cont[indice]--;
+    }
+
+    //copia o vetor de saida para o vetor original
+    for(int i=0; i<n; i++){
+        jogadores[i] = saida[i];
+    }
+}
+
+//radix sort também foi adptada para ordenar os nomes dos jogadores
+void radixSort(jogador jogadores[], int n){
+    int maior_tamanho = 0;
+
+    //encontra o tamanho máximo de nome
+    for(int i=0; i<n; i++){
+        int tamanho_nome = strlen(jogadores[i].nome);
+        if(tamanho_nome>maior_tamanho){
+            maior_tamanho = tamanho_nome;
+        }
+    }
+
+    //usa o algortimo counting sort para cada posição do nome
+    //do ultimo caracter para o primeiro
+    for(int pos = maior_tamanho -1; pos>=0;pos--){
+        countingSort(jogadores,n,pos);
     }
 }
