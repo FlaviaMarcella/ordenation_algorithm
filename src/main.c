@@ -1,12 +1,16 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <locale.h>
 #include "algorithm.h"
 
 
 int main(int argc, char *argv[]) {
+
+	// Configura o locale para suportar UTF-8
+    setlocale(LC_ALL, "");
 
     if (argc != 2) {
         printf("Uso: %s <algoritmo>\n", argv[0]);

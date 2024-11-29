@@ -5,8 +5,8 @@
 #include <time.h>
 #include "algorithm.h"
 
-long long trocas = 0;
-long long comparacoes = 0;
+long long int trocas = 0;
+long long int comparacoes = 0;
 
 void imprime_vetor(jogador jogadores[], int contador){
     printf("Jogadores ordenados por nome:\n");
