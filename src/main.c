@@ -53,10 +53,13 @@ char linha[256];
 		contador++;
 	}
 
+
 	fclose(arquivo);
 
-	//ordena o vetor com bubble sort
-	bubbleSort(jogadores, contador);
+	//imprime_vetor(jogadores, contador);
+
+	//bubbleSort(jogadores, contador);
+	mergeSort(jogadores,0, contador-1);
 	//imprime_vetor(jogadores,contador);
 	imprime_vetor(jogadores, contador);
 

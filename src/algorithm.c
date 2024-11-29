@@ -47,3 +47,52 @@ void bubbleSort(jogador jogadores[], int contador){
             break;
     }
 }
+
+//função para mesclar duas metades ordenadas, usadas no merge sort
+void merge(jogador jogadores[], int inicio, int meio, int fim){
+    int dimE = meio - inicio + 1;
+    int dimD = fim - meio;
+
+    jogador esquerda[dimE], direita[dimD];
+    int i,j;
+    for(i=0;i<dimE;i++){
+        esquerda[i]=jogadores[inicio+i];
+    }
+    for(j=0;j<dimD; j++){
+        direita[j] = jogadores[meio + 1 + j];
+    }
+
+    i=0;j=0; int k=inicio;
+
+    while(i<dimE && j<dimD){
+        if(strcmp(esquerda[i].nome, direita[j].nome)<=0){
+            jogadores[k] = esquerda[i];
+            i++;
+        }else{
+            jogadores[k] = direita[j];
+            j++;
+        }
+        k++;
+    }
+    while(i<dimE){
+        jogadores[k] = esquerda[i];
+        i++;
+        k++;
+    }
+    while(j<dimD){
+        jogadores[k] = direita[j];
+        j++;
+        k++;
+    }
+}
+
+void mergeSort(jogador jogadores[], int inicio, int fim){
+    if(inicio < fim){
+        int meio = inicio + (fim-inicio)/2;
+
+        mergeSort(jogadores, inicio, meio);
+        mergeSort(jogadores, meio+1, fim);
+
+        merge(jogadores, inicio, meio, fim);
+    }
+}
